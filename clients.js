@@ -1,10 +1,8 @@
-// ================================
-// GESTION DES CLIENTS
-// ================================
+
 
 let indexEnCours = null;
 
-// Sélection des éléments
+
 const form = document.getElementById("clientForm");
 const tbody = document.getElementById("clientsTable");
 const toggleFormBtn = document.getElementById("toggleFormBtn");
@@ -20,9 +18,7 @@ function changeBtnState(state) {
 }
 
 
-// ================================
-// AFFICHER LES CLIENTS
-// ================================
+
 function afficherClients() {
   tbody.innerHTML = "";
 
@@ -50,9 +46,7 @@ function afficherClients() {
   });
 }
 
-// ================================
-// SUPPRIMER CLIENT
-// ================================
+
 function supprimerClient(index) {
     deleteClientById(clients[index].id)
     .then(() => {
@@ -64,9 +58,6 @@ function supprimerClient(index) {
     });
 }
 
-// ================================
-// AJOUTER / MODIFIER CLIENT
-// ================================
 form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
@@ -78,10 +69,10 @@ form.addEventListener("submit", async function (e) {
     };
 
     if (!modify) {
-        // ➕ AJOUT
+     
         await addClient(client);
     } else {
-        // ✏️ MODIFICATION
+      
         await modifyClient(clients[indexEnCours].id,client);
         changeBtnState(false);
         indexEnCours = null;
@@ -91,9 +82,7 @@ form.addEventListener("submit", async function (e) {
 });
 
 
-// ================================
-// MODIFIER CLIENT
-// ================================
+
 function modifierClient(index) {
     changeBtnState(true);
 
@@ -110,4 +99,5 @@ function modifierClient(index) {
 
 getClients().then(() => {
     afficherClients();
+
 });
