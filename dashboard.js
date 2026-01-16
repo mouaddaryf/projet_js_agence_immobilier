@@ -196,7 +196,7 @@ function resetFilters() {
 btnApply.addEventListener("click", applyFilters);
 btnReset.addEventListener("click", resetFilters);
 
-// Bonus: filtres “dynamiques” (update instantané)
+//filtres “dynamiques” (update instantané)
 [elTypeContrat, elStatutBien, elAgent, elFrom, elTo].forEach(el => {
   el.addEventListener("change", applyFilters);
 });
@@ -212,3 +212,4 @@ btnReset.addEventListener("click", resetFilters);
     alert("Erreur: impossible de charger les données du dashboard.");
   }
 })();
+
