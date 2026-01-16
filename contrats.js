@@ -1,13 +1,7 @@
-// ================================
-// GESTION DES VISITES
-// ================================
-// Sélection DOM
+
 const form = document.getElementById("contractForm");
 const tbody = document.getElementById("contractsTable");
 
-// ================================
-// INITIALISER LES LISTES DEROULANTES
-// ================================
 
 
 async function initSelects() {
@@ -16,7 +10,7 @@ async function initSelects() {
   const agentSelect = document.getElementById("agentSelect");
 
   try {
-    // optional: disable while loading
+  
     bienSelect.disabled = clientSelect.disabled = agentSelect.disabled = true;
 
     const [biens, clients, agents] = await Promise.all([
@@ -103,9 +97,6 @@ function afficherContrats() {
   });
 }
 
-// ================================
-// AJOUTER VISITE
-// ================================
 form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -141,5 +132,6 @@ function supprimerContrat(index) {
 getContrats().then(() => {
     afficherContrats();
 });
+
 
 initSelects();
