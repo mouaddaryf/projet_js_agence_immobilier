@@ -1,13 +1,8 @@
-// ================================
-// GESTION DES VISITES
-// ================================
-// Sélection DOM
+
 const form = document.getElementById("visiteForm");
 const tbody = document.getElementById("visitesTable");
 
-// ================================
-// INITIALISER LES LISTES DEROULANTES
-// ================================
+
 
 
 async function initSelects() {
@@ -16,7 +11,7 @@ async function initSelects() {
   const agentSelect = document.getElementById("agentSelect");
 
   try {
-    // optional: disable while loading
+    
     bienSelect.disabled = clientSelect.disabled = agentSelect.disabled = true;
 
     const [biens, clients, agents] = await Promise.all([
@@ -76,9 +71,7 @@ function populateSelect(selectEl, items, { valueKey, labelKey, placeholder }) {
 
 
 
-// ================================
-// AFFICHER LES VISITES
-// ================================
+
 function afficherVisites() {
   tbody.innerHTML = "";
 
@@ -101,9 +94,7 @@ function afficherVisites() {
   });
 }
 
-// ================================
-// AJOUTER VISITE
-// ================================
+
 form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -121,9 +112,7 @@ form.addEventListener("submit", function (e) {
     });
 });
 
-// ================================
-// SUPPRIMER VISITE
-// ================================
+
 function supprimerVisite(index) {
     deleteVisiteById(visites[index].id)
     .then(() => {
@@ -131,11 +120,10 @@ function supprimerVisite(index) {
     });
 }
 
-// ================================
-// AU CHARGEMENT
-// ================================
+
 getVisites().then(() => {
   afficherVisites();
 });
+
 
 initSelects();
