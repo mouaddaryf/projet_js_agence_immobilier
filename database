@@ -1,0 +1,71 @@
+
+CREATE TABLE BiensImmobiliers (
+    id SERIAL PRIMARY KEY,
+    titre VARCHAR(100) NOT NULL,          -- appartement, villa
+    type VARCHAR(10) CHECK (type IN ('vente', 'location')) NOT NULL,
+    prix NUMERIC(12,2) NOT NULL,
+    statut VARCHAR(10) CHECK (statut IN ('disponible', 'vendu', 'loué')) DEFAULT 'disponible'
+);
+
+
+CREATE TABLE Agents (
+    id SERIAL PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    telephone VARCHAR(20),
+    email VARCHAR(100),
+    dateEmbauche DATE
+);
+
+
+CREATE TABLE Clients (
+    id SERIAL PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    telephone VARCHAR(20),
+    email VARCHAR(100),
+    type VARCHAR(10) CHECK (type IN ('acheteur', 'locataire')) NOT NULL
+);
+
+
+CREATE TABLE Visites (
+    id SERIAL PRIMARY KEY,
+    bienId INT NOT NULL,
+    clientId INT NOT NULL,
+    agentId INT NOT NULL,
+    date TIMESTAMP NOT NULL,
+    FOREIGN KEY (bienId) REFERENCES BiensImmobiliers(id) ON DELETE CASCADE,
+    FOREIGN KEY (clientId) REFERENCES Clients(id) ON DELETE CASCADE,
+    FOREIGN KEY (agentId) REFERENCES Agents(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE Contrats (
+    id SERIAL PRIMARY KEY,
+    bienId INT NOT NULL,
+    clientId INT NOT NULL,
+    agentId INT NOT NULL,                  -- lien direct avec l'agent
+    type VARCHAR(10) CHECK (type IN ('vente', 'location')) NOT NULL,
+    montant NUMERIC(12,2) NOT NULL,
+    date DATE NOT NULL,
+    FOREIGN KEY (bienId) REFERENCES BiensImmobiliers(id) ON DELETE CASCADE,
+    FOREIGN KEY (clientId) REFERENCES Clients(id) ON DELETE CASCADE,
+    FOREIGN KEY (agentId) REFERENCES Agents(id) ON DELETE CASCADE
+);
+
+
+CREATE VIEW short_biens AS
+SELECT
+  id,
+  titre
+FROM biens;
+
+CREATE VIEW short_agents AS
+SELECT
+  id,
+  nom
+FROM agents;
+
+CREATE VIEW short_clients AS
+SELECT
+  id,
+  nom
+FROM clients;
