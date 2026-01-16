@@ -1,11 +1,7 @@
-// ================================
-// GESTION DES AGENTS
-// ================================
 
-// Index de l’agent en cours de modification
 let indexEnCours = null;
 
-// Sélection des éléments
+
 const form = document.getElementById("agentForm");
 const tbody = document.getElementById("agentsTable");
 
@@ -22,9 +18,7 @@ function changeBtnState(state) {
 }
 
 
-// ================================
-// AFFICHER LES AGENTS
-// ================================
+
 function afficherAgents() {
   tbody.innerHTML = "";
 
@@ -52,9 +46,7 @@ function afficherAgents() {
   });
 }
 
-// ================================
-// AJOUTER / MODIFIER AGENT
-// ================================
+
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -66,10 +58,10 @@ form.addEventListener("submit", async function (e) {
   };
 
   if (!modify) {
-    // ➕ AJOUT
+
     await addAgent(agent);
   } else {
-    // ✏️ MODIFICATION
+ 
     await modifyAgent(agents[indexEnCours].id, agent);
     changeBtnState(false);
     indexEnCours = null;
@@ -78,9 +70,7 @@ form.addEventListener("submit", async function (e) {
   afficherAgents();
 });
 
-// ================================
-// MODIFIER AGENT
-// ================================
+
 function modifierAgent(index) {
     const agent = agents[index];
 
@@ -94,9 +84,7 @@ function modifierAgent(index) {
     indexEnCours = index;
 }
 
-// ================================
-// SUPPRIMER AGENT
-// ================================
+
 function supprimerAgent(index) {
     deleteAgentById(agents[index].id)
     .then(() => {
@@ -104,9 +92,8 @@ function supprimerAgent(index) {
     });
 }
 
-// ================================
-// AU CHARGEMENT
-// ================================
+
 getAgents().then(() => {
   afficherAgents();
 });
+
