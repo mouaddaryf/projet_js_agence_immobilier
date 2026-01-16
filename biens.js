@@ -1,11 +1,7 @@
-// ================================
-// GESTION DES BIENS IMMOBILIERS
-// ================================
 
-// Index du bien en cours de modification
 let indexEnCours = null;
 
-// Sélection des éléments
+
 const form = document.getElementById("bienForm");
 const tbody = document.getElementById("biensTable");
 
@@ -21,9 +17,7 @@ function changeBtnState(state) {
 }
 
 
-// ================================
-// AFFICHER LES BIENS
-// ================================
+
 function afficherBiens() {
   tbody.innerHTML = "";
 
@@ -51,9 +45,7 @@ function afficherBiens() {
   });
 }
 
-// ================================
-// AJOUTER / MODIFIER UN BIEN
-// ================================
+
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -65,10 +57,10 @@ form.addEventListener("submit", async function (e) {
   };
 
   if (!modify) {
-    // ➕ AJOUT
+
     await addBien(bien);
   } else {
-    // ✏️ MODIFICATION
+  
     await modifyBien(biens[indexEnCours].id, bien);
     changeBtnState(false);
     indexEnCours = null;
@@ -77,9 +69,7 @@ form.addEventListener("submit", async function (e) {
   afficherBiens();
 });
 
-// ================================
-// REMPLIR LE FORMULAIRE (MODIFIER)
-// ================================
+
 function modifierBien(index) {
   const bien = biens[index];
 
@@ -93,9 +83,6 @@ function modifierBien(index) {
   indexEnCours = index;
 }
 
-// ================================
-// SUPPRIMER UN BIEN
-// ================================
 function supprimerBien(index) {
   deleteBienById(biens[index].id)
   .then(() => {
@@ -103,9 +90,8 @@ function supprimerBien(index) {
   });
 }
 
-// ================================
-// AFFICHAGE AU CHARGEMENT
-// ================================
+
 getBiens().then(() => {
   afficherBiens();
 });
+
